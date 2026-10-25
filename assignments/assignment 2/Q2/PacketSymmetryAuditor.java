@@ -1,6 +1,6 @@
 public class PacketSymmetryAuditor {
     public static void main(String[] args) {
-        String payload = "racecar"; 
+        String payload = "racecar";
         int n = payload.length();
 
         TransactionStack stack = new TransactionStack(n);

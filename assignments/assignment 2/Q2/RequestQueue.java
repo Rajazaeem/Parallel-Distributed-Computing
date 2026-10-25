@@ -1,8 +1,8 @@
 public class RequestQueue {
     private char[] data;
-    private int front;   // index of the next item to remove
-    private int rear;    // index where the next item will be added
-    private int size;    // number of items currently stored
+    private int front;
+    private int rear;
+    private int size;
 
     public RequestQueue(int capacity) {
         if (capacity < 1) {

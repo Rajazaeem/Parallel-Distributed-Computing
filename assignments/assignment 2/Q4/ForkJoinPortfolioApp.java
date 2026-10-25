@@ -11,7 +11,6 @@ public class ForkJoinPortfolioApp {
             assets[i] = 1 + rand.nextDouble() * 999;
         }
 
-        // Keep the original values for a fair serial comparison.
         double[] originalAssets = assets.clone();
 
         ForkJoinPool pool = new ForkJoinPool();
