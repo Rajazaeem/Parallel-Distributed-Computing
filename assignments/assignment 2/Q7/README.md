@@ -1,10 +1,29 @@
-# Q7 — Cache Locality Benchmark (Marks 5)
+# Q7 — Cache Locality Benchmark
 
-Row-major vs column-major 2D traversal and CPU cache behaviour.
+## Objective
+Show how the traversal order of a 2D array affects performance because of CPU cache behaviour (spatial locality and cache lines).
 
-## Required files
-- CacheLocalityBenchmark.java — create a 2000x2000 double matrix; traverseRowMajor() (for i; for j) and traverseColumnMajor() (for j; for i) summing all elements; measure with System.nanoTime() over 10 iterations; output times in ms and the row-major/column-major speedup ratio.
+## Files
+- `CacheLocalityBenchmark.java` — builds a 2000 x 2000 `double` matrix; `traverseRowMajor()` iterates with the row index outer and column index inner, `traverseColumnMajor()` swaps the loops; both are timed with `System.nanoTime()` over 10 iterations and the speedup ratio is computed.
 
-Report must explain how CPU cache lines (~64 bytes) and spatial locality govern the results.
+## Java constructs used
+- **2D array** — `double[2000][2000]`.
+- **Nested loops with swapped order** — the only difference between the two methods is which index is the outer loop.
+- **`System.nanoTime()`** — high-resolution timing, averaged over 10 iterations.
+- **Speedup ratio** — column-major time divided by row-major time.
 
-Status: TODO
+## Run
+```
+javac *.java
+java CacheLocalityBenchmark
+```
+
+## Sample output
+```
+Row-major average:    (smaller) ms
+Column-major average: (larger) ms
+Speedup (row over column): ~Nx
+```
+
+## How the output verifies correctness
+Row-major traversal is consistently faster. A row of the matrix is contiguous in memory, and the CPU loads ~64-byte cache lines (8 doubles) at a time; walking along a row hits data already in cache (spatial locality), while column-major jumps to a new row each step, causing a cache miss on nearly every access. The speedup ratio quantifies this difference.
