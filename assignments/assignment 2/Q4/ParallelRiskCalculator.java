@@ -14,11 +14,11 @@ public class ParallelRiskCalculator extends RecursiveTask<Double> {
     @Override
     protected Double compute() {
         int length = hi - lo;
-        if (length <= THRESHOLD) {                   // base case: sum directly
+        if (length <= THRESHOLD) {
             double sum = 0.0;
             for (int i = lo; i < hi; i++) sum += assets[i];
             return sum;
-        } else {                                     // split in half
+        } else {
             int mid = (lo + hi) / 2;
             ParallelRiskCalculator left  = new ParallelRiskCalculator(assets, lo, mid);
             ParallelRiskCalculator right = new ParallelRiskCalculator(assets, mid, hi);
